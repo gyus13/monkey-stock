@@ -1,15 +1,53 @@
-node {
-     stage('Clone repository') {
-         checkout scm
-     }
+pipeline {
+    agent any
+    environment {
+        DOCKERHUB_USERNAME = "dev210"
+        APP_NAME = "monkey-community"
+        IMAGE_TAG = "${BUILD_NUMBER}"
+        IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+    }
 
-     stage('Build image') {
-         app = docker.build("dev210/monkey-community")
-     }
-     stage('Push image') {
-         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-             app.push("${env.BUILD_NUMBER}")
-             app.push("latest")
-         }
-     }
- }
+    stages {
+
+        stage('Clean Workspace'){
+            steps {
+                script {
+                    cleanWs()
+                }
+            }
+        }
+
+        stage('Checkout SCM') {
+            steps {
+                url: 'https://github.com/SeSac-Cloud-Final-3/monkey-stock.git',
+                branch: 'backend-community',
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker_image = docker.build "${IMAGE_NAME}"
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', docker-hub) {
+                        docker_image.push("${BUILD_NUMBER}")
+                        docker_image.push("latest")
+                    }
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh "docker build -t ${IMAGE_NAME}:latest ."
+            }
+        }
+    }
+}
