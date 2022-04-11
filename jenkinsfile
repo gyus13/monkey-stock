@@ -3,7 +3,6 @@ pipeline {
     environment {
         DOCKERHUB_USERNAME = "dev210"
         APP_NAME = "monkey-community"
-        IMAGE_TAG = "${BUILD_NUMBER}"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
     }
 
@@ -34,7 +33,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', docker-hub) {
+                    docker.withDockerRegistry('', docker-hub) {
                         docker_image.push("${env.BUILD_NUMBER}")
                         docker_image.push("latest")
                     }
