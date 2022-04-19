@@ -32,7 +32,7 @@ function App() {
   };
 
   // 로그인된 토큰을 전체 페이지 헤더에 삽입위해 여기서 사용
-  useEffect(() => {
+  useLayoutEffect(() => {
     setAuthToken(localStorage.getItem('accessToken'));
   }, []);
 
