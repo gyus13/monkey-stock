@@ -1,173 +1,132 @@
-import React, { useState, useEffect } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import axios from "axios";
 import styled from "styled-components/macro";
 import OrderButton from "./OrderButton";
 import useStock from "../../utils/useStock";
 
-const Trade = ({ backAPI }) => {
-  const compId = useParams().competitionId;
+const Trade = ({ backAPI, num, setCompany }) => {
+    const compId = num;
 
-  const { stockInfo, isLoading } = useStock();
-  const pfAPI = backAPI + "/account/portfolio";
-  const [pfs, setPfs] = useState([]);
-  const [pfList, setPfList] = useState([]);
+    const { stockInfo, isLoading } = useStock();
+    const pfAPI = backAPI + "/account/portfolio";
+    const [pfs, setPfs] = useState([]);
+    const [pfList, setPfList] = useState([]);
 
-  const [orderOpened, setOrderOpened] = useState(false);
+    useLayoutEffect(() => {
+        let isMounted = true;
+        getPfs(pfAPI)
+            .then((response) => response[0].data)
+            .then((data) => {
+                if (isMounted) {
+                    setPfs(data);
+                    setPfList(data.map((stock) => stock.stockInfo.ticker));
+                }
+            });
+        return () => {
+            isMounted = false;
+        };
+    }, [stockInfo]);
 
-  useEffect(() => {
-    let isMounted = true;
-    getPfs(pfAPI)
-      .then((response) => response[0].data)
-      .then((data) => {
-        if (isMounted) {
-          setPfs(data);
-          setPfList(data.map((stock) => stock.stockInfo.ticker));
-        }
-      });
-    return () => {
-      isMounted = false;
+    const getPfs = async (request) => {
+        let pf = [];
+        pf = pf.concat(
+            await axios.get(request, {
+                params: { competitionId: compId },
+            })
+        );
+        return pf;
     };
-  }, [stockInfo]);
 
-  const getPfs = async (request) => {
-    let pf = [];
-    pf = pf.concat(
-      await axios.get(request, {
-        params: { competitionId: compId },
-      })
+    const own = stockInfo
+        ? stockInfo.data.filter((stock) => pfList.includes(stock.ticker))
+        : null;
+    const notOwn = stockInfo
+        ? stockInfo.data.filter((stock) => !pfList.includes(stock.ticker))
+        : null;
+
+    return (
+        <>
+            <Container>
+                <Table>
+                    <thead>
+                        <th>단축코드</th>
+                        <th>회사명</th>
+                        <th>시가</th>
+                        <th>현재가</th>
+                        <th>전일대비</th>
+                    </thead>
+                    <tbody>
+                        {own &&
+                            own.map((stock, idx) => (
+                                <tr key={idx} onClick={() => setCompany(stock)}>
+                                    <td>{stock.ticker}</td>
+                                    <td>{stock.companyName}</td>
+                                    <td>{(stock.openPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
+                                    <td>{(stock.currentPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
+                                    <td
+                                        style={{
+                                            color:
+                                                stock.openPrice < stock.currentPrice
+                                                    ? "red"
+                                                    : stock.openPrice > stock.currentPrice
+                                                        ? "blue"
+                                                        : "black",
+                                        }}
+                                    >
+                                        {(stock.currentPrice - stock.openPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    </td>
+                                </tr>
+                            ))}
+                        {notOwn &&
+                            notOwn.map((stock, idx) => (
+                                <tr key={idx} onClick={() => setCompany(stock)}>
+                                    <td>{stock.ticker}</td>
+                                    <td>{stock.companyName}</td>
+                                    <td>{(stock.openPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
+                                    <td>{(stock.currentPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
+                                    <td
+                                        style={{
+                                            color:
+                                                stock.openPrice < stock.currentPrice
+                                                    ? "red"
+                                                    : stock.openPrice > stock.currentPrice
+                                                        ? "blue"
+                                                        : "black",
+                                        }}
+                                    >
+                                        {(stock.currentPrice - stock.openPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </Table>
+            </Container>
+        </>
     );
-    return pf;
-  };
-
-  const own = stockInfo
-    ? stockInfo.data.filter((stock) => pfList.includes(stock.ticker))
-    : null;
-  const notOwn = stockInfo
-    ? stockInfo.data.filter((stock) => !pfList.includes(stock.ticker))
-    : null;
-
-  return (
-    <>
-      <Container>
-        <Table>
-          <thead>
-            <tr>
-              <th>단축코드</th>
-              <th>회사명</th>
-              <th>시가</th>
-              <th>현재가</th>
-              <th>전일대비</th>
-              <th>거래</th>
-            </tr>
-          </thead>
-          <tbody>
-            {own &&
-              own.map((stock, idx) => (
-                <tr key={idx}>
-                  <td>{stock.ticker}</td>
-                  <td>{stock.companyName}</td>
-                  <td>{stock.openPrice}</td>
-                  <td>{stock.currentPrice}</td>
-                  <td
-                    style={{
-                      color:
-                        stock.openPrice < stock.currentPrice
-                          ? "red"
-                          : stock.openPrice > stock.currentPrice
-                          ? "blue"
-                          : "black",
-                    }}
-                  >
-                    {stock.currentPrice - stock.openPrice}
-                  </td>
-                  <td>
-                    {
-                      <OrderButton
-                        backAPI={backAPI}
-                        isBuying={true}
-                        pf={null}
-                        ticker={stock.ticker}
-                        compId={compId}
-                        orderOpened={orderOpened}
-                        setOrderOpened={setOrderOpened}
-                      />
-                    }
-                    {
-                      <OrderButton
-                        backAPI={backAPI}
-                        isBuying={false}
-                        pf={pfs.find(
-                          (p) => p.stockInfo.ticker === stock.ticker
-                        )}
-                        ticker={stock.ticker}
-                        compId={compId}
-                        orderOpened={orderOpened}
-                        setOrderOpened={setOrderOpened}
-                      />
-                    }
-                  </td>
-                </tr>
-              ))}
-            {notOwn &&
-              notOwn.map((stock, idx) => (
-                <tr key={idx}>
-                  <td>{stock.ticker}</td>
-                  <td>{stock.companyName}</td>
-                  <td>{stock.openPrice}</td>
-                  <td>{stock.currentPrice}</td>
-                  <td
-                    style={{
-                      color:
-                        stock.openPrice < stock.currentPrice
-                          ? "red"
-                          : stock.openPrice > stock.currentPrice
-                          ? "blue"
-                          : "black",
-                    }}
-                  >
-                    {stock.currentPrice - stock.openPrice}
-                  </td>
-                  <td>
-                    {
-                      <OrderButton
-                        backAPI={backAPI}
-                        isBuying={true}
-                        pf={null}
-                        ticker={stock.ticker}
-                        compId={compId}
-                        orderOpened={orderOpened}
-                        setOrderOpened={setOrderOpened}
-                      />
-                    }
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
-      </Container>
-      {/* <Routes>
-        <Route path="order" element={<OrderBu backAPI={backAPI} />} />
-      </Routes> */}
-      <Outlet />
-    </>
-  );
 };
 
 export default Trade;
 
 const Container = styled.div`
-  margin: 1rem auto;
-  width: 80%;
-  display: flex;
-  justify-content: center;
+margin: 1rem auto;
+display: flex;
+justify-content: center;
 `;
 
 const Table = styled.table`
-  border: 1px solid;
-  td,
-  th {
-    padding: 5px;
-    border: 1px solid;
+border-collapse: collapse;
+td,th {
+    padding: 8px;
+}
+tr {
+// 드래그 금지
+-webkit-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+user-select:none;
+cursor: pointer;
+:hover{
+  background-color: rgba(0,0,0,0.1);
   }
+}
 `;

@@ -17,7 +17,7 @@ const Search = () => {
     // 최초 게시글 불러오기
     useLayoutEffect(() => {
         async function refresh() {
-            console.log(keyword)
+            // console.log(keyword)
             const { data } = await axios.get(BACK_URL + `/api/v1/topic/${keyword}/?page=${pageNum}&size=10`);
             setMax(Math.ceil(data.count/10));
             setTotals(data.rows);
@@ -29,7 +29,7 @@ const Search = () => {
         async function refresh() {
             await axios.get(BACK_URL + `/api/v1/topic/${keyword}/?page=${pageNum}&size=10`)
                 .then((res) => {
-                    console.log(res.data.rows);
+                    // console.log(res.data.rows);
                     setTotals(res.data.rows);
                 })
         }

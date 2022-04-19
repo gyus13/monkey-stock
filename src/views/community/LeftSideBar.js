@@ -5,9 +5,8 @@ import MyPage from "./MyPage";
 import { Register } from "./user/Register";
 import styled, { css } from "styled-components/macro";
 import loginCheck from "../../utils/loginCheck";
-import Search from "./topic/Search";
 
-const LeftSideBar = () => {
+const LeftSideBar = ({update, setUpdate}) => {
 
     const [showRegister, setShowRegister] = useState(false);
     const [isLoggedin, setIsLoggedin] = useState(false);
@@ -15,12 +14,11 @@ const LeftSideBar = () => {
     useLayoutEffect(() => {
         async function refresh() {
             const data = await loginCheck();
-
             setIsLoggedin(data);
-            // console.log(isLoggedin);
+            setUpdate(false);
         }
         refresh();
-    }, [isLoggedin]);
+    }, [update]);
 
     const openRegister = (e) => {
         if (e.target !== e.currentTarget) return;
@@ -61,7 +59,7 @@ text-align: center;
 justify-content: center;
 min-width: 200px;
 max-width: 200px;
-min-height: 100vh;
+min-height: 90vh;
 background-color: #f1f3f4;
 `
 

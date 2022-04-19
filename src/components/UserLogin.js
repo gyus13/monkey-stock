@@ -1,34 +1,33 @@
-import React, { useState, useEffect, } from "react";
-import axios from "axios";
+import React, { useState, useLayoutEffect, } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, {css} from "styled-components/macro";
 import { Login } from "../views/community/user/Login";
-import MyPage from "../views/community/MyPage";
 import loginCheck from "../utils/loginCheck";
 import { FaPowerOff } from "react-icons/fa";
 
-function UserLogin()  {
+function UserLogin({setUpdate})  {
+
+    let navigate = useNavigate();
     const [showLogin, setShowLogin] = useState(false);
     const [isLoggedin, setIsLoggedin] = useState(false);
     
-    useEffect(() => {
+    useLayoutEffect(() => {
         async function refresh() {
             const data = await loginCheck();
-
             setIsLoggedin(data);
-            // console.log(isLoggedin);
+            setUpdate(true);
         }
         refresh();
-    }, [isLoggedin]);
+    }, [localStorage.getItem('accessToken'),]);
 
     const openLogin = (e) => {
         if (e.target !== e.currentTarget) return;
         setShowLogin(true);
-        // console.log(showLogin);
     }
 
     const getLogout = () => {
         localStorage.removeItem("accessToken");
-        window.location.replace("/community");
+        navigate(0);
     }
 
     return (

@@ -36,7 +36,7 @@ const Competition = ({ backAPI }) => {
     let msg =
       "대회에 참가하시면 대회 전용 계좌가 생성되며,\n대회가 종료되면 전용 계좌는 자동 삭제됩니다.\n참가하시겠습니까?";
     if (window.confirm(msg)) {
-      enroll(event.target.getAttribute("compid"));
+      enroll(event.target.getAttribute(`compid`));
     } else {
       console.log("취소");
     }
@@ -46,8 +46,9 @@ const Competition = ({ backAPI }) => {
     const requestDto = {
       competitionId: compid,
     };
+    const enrollAPI = partAPI + "/" + compid;
     await axios
-      .post(partAPI, requestDto)
+      .post(enrollAPI, requestDto)
       .then(() => window.alert("성공했습니다"))
       .catch((err) => {
         window.alert(err.response.data.message);
@@ -56,16 +57,6 @@ const Competition = ({ backAPI }) => {
   };
   return (
     <>
-      <Container>
-        <SubList>
-          <ItemBox>
-            <Item to="/account">투자 현황</Item>
-          </ItemBox>
-          <ItemBox>
-            <Item to="/competition">대회</Item>
-          </ItemBox>
-        </SubList>
-      </Container>
       <Container>
         <Table>
           <thead>

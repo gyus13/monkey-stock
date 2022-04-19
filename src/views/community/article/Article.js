@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components/macro";
 import parse from 'html-react-parser';
@@ -9,6 +10,7 @@ import 'moment/locale/ko'
 function Article() {
 
     // /article/ 제거한 param 값
+    let navigate = useNavigate();
     const id = window.location.pathname.substring(19);
     const [userProfile, setUserProfile] = useState([]);
     const [contents, setContents] = useState([]);
@@ -51,7 +53,7 @@ function Article() {
     const deletePost = async () => {
         await axios.delete(BACK_URL + `/api/v1/article/?id=${id}`);
         alert("삭제되었음!");
-        window.location.replace("/community");
+        navigate("/community");
     }
 
     return (

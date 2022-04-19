@@ -4,7 +4,7 @@ import axios from "axios";
 import styled, {css} from "styled-components/macro";
 import UserLogin from "./UserLogin";
 
-const Navbar = ({ setDomain }) => {
+const Navbar = ({ setDomain, setUpdate }) => {
 
     return (
         <Nav>
@@ -12,11 +12,11 @@ const Navbar = ({ setDomain }) => {
                 <h1>Monkeystock</h1>
             </Logo>
             <Menu>
-                <Box to="/account" onClick={() => setDomain("account")}>모의투자</Box>
+                <Box to="/stock" onClick={() => setDomain("stock")}>모의투자</Box>
                 <Box to="/community" onClick={() => setDomain("community")}>커뮤니티</Box>
                 {/* <Box reloadDocument to="/chatbot">상담문의</Box> */}
             </Menu>
-            <UserLogin/>
+            <UserLogin setUpdate={setUpdate}/>
         </Nav>
     )
 }

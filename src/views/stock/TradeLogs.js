@@ -6,7 +6,7 @@ import styled from "styled-components/macro";
 const TradeLogs = ({ backAPI }) => {
   const logsAPI = backAPI + "/logs";
   const [logs, setLogs] = useState([]);
-  let params = useParams();
+  let params = window.location.pathname.substring(6);
 
   useEffect(() => {
     let isMounted = true;
@@ -24,7 +24,7 @@ const TradeLogs = ({ backAPI }) => {
     let logs = [];
     logs = logs.concat(
       await axios.get(request, {
-        params: { competitionId: params.competitionId },
+        params: { competitionId: params },
       })
     );
     return logs;

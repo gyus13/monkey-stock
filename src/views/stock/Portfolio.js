@@ -6,7 +6,7 @@ import styled from "styled-components/macro";
 const Portfolio = ({ backAPI }) => {
   const pfAPI = backAPI + "/account/portfolio";
   const [pfs, setPfs] = useState([]);
-  let params = useParams();
+  let params = window.location.pathname.substring(11);
 
   useEffect(() => {
     let isMounted = true;
@@ -24,13 +24,14 @@ const Portfolio = ({ backAPI }) => {
     let pf = [];
     pf = pf.concat(
       await axios.get(request, {
-        params: { competitionId: params.competitionId },
+        params: { competitionId: params },
       })
     );
     return pf;
   };
   return (
     <Container>
+      {console.log(params)}
       <Table>
         <thead>
           <tr>

@@ -24,7 +24,9 @@ export const Register = ({ showRegister, setShowRegister }) => {
             }).then((res) => {
 
                 if (res.data.userid === register.userid){
-                    window.location.replace("/community");
+                    setShowRegister(false);
+                    alert("회원가입 성공")
+                    // window.location.replace("/community");
                 } else if (res.data.errors[0].message === "userid must be unique") {
                     alert("해당 아이디는 이미 존재합니다.")
                 } else if (res.data.errors[0].message === "nickname must be unique") {

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
 import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Login = ({ showLogin, setShowLogin }) => {
-
+    
+    let navigate = useNavigate();
     const [login, setLogin] = useState({ userid: "", password: "", });
     const BACK_URL = "http://localhost:8081"
 
@@ -19,10 +20,11 @@ export const Login = ({ showLogin, setShowLogin }) => {
             localStorage.setItem('accessToken', token);
 
             if (token) {
-                window.location.reload();
+                setShowLogin(false);
+                navigate(0);
+                // window.location.reload();
             } else {
                 alert("로그인 실패")
-                window.location.reload();
             }
         });
     };

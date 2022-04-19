@@ -1,5 +1,6 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/ko.js';
@@ -7,7 +8,7 @@ import styled from "styled-components/macro";
 import './CKEdit.css';
 
 function Post() {
-
+    let navigate = useNavigate();
     const [post, setPost] = useState({ title: "", content: "", tags: "" });
     const [topics, setTopics] = useState([]);
     const BACK_URL = "http://localhost:8081"
@@ -41,7 +42,7 @@ function Post() {
             }).then((res) => {
                 console.log(res);
                 if (res.data.title === post.title){
-                    window.location.replace("/community");
+                    navigate("/community");
                 } else if (res.data.original.code === "ER_DATA_TOO_LONG") {
                     alert("제목이 너무 깁니다. 30자 이내.")
                 }
