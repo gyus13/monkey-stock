@@ -1,0 +1,6 @@
+.ck-editor__editable {
+    min-height: 500px;
+    max-height: 500px;
+    max-width: 100%;
+    overflow-y: scroll;
+}

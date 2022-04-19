@@ -2,13 +2,11 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_USERNAME = "dev210"
-        APP_NAME = "monkey-community"
+        APP_NAME = "monkey-client"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
-        Credential = "docker-hub"
     }
 
     stages {
-
         stage('Clean Workspace'){
             steps {
                 script {
@@ -39,6 +37,12 @@ pipeline {
                         docker_image.push("latest")
                     }
                 }
+            }
+        }
+
+        stage('Update GitOps Repo') {
+            steps {
+                build job: 'updateManifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
             }
         }
     }
