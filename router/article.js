@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Models = require('./../models');
 const Article = Models.Article;
-const Account = Models.Account;
 const Comment = Models.Comment;
 const Topic = Models.Topic;
 
@@ -35,7 +34,7 @@ router.post("/api/v1/article", async (req, res) => {
 
             const newArticle = await new Article(post).save().catch(error => {
                 res.send(error);
-              });
+            });
 
             res.send(newArticle);
         })

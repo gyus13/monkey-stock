@@ -1,2 +1,12 @@
-# monkey-stock
-새싹 모듈 프로젝트 팀 몽키비즈니스
+# Dependancy
+npm init
+npm install --save express
+npm install --save mysql2
+npm install --save sequelize
+npm install --save jsonwebtoken
+npm install --save dotenv 
+npm install --save nodemon
+npm install --save cors
+npm install --save bcrypt
+
+# Jenkins Test

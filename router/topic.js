@@ -8,7 +8,6 @@ const Article = Models.Article;
 router.post("/api/v1/topic", async (req, res) => {
     const post = {
         tags: req.body.tags,
-        url: req.body.url,
     };
 
     const newTopic = await new Topic(post).save();

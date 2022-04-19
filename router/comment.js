@@ -3,10 +3,9 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Models = require('./../models');
 const Comment = Models.Comment;
-const Account = Models.Account;
 
 // 댓글 작성
-router.post("/api/comment/post", async (req, res) => {
+router.post("/api/v1/comment", async (req, res) => {
     const { articleid } = req.body;
     const { authorization } = req.headers;
 
@@ -31,13 +30,12 @@ router.post("/api/comment/post", async (req, res) => {
         };
 
         const newComment = await new Comment(post).save();
-        // Account.increment({points: 50},{where: {user_id: data.id}})
         res.send(newComment);
     })
 });
 
 // 개별 댓글 불러오기
-router.get("/api/comment/get/:id", async (req, res) =>{
+router.get("/api/v1/comment/:id", async (req, res) =>{
 
     const comments = await Comment.findAll({
         order: [['createdAt', 'ASC']],

@@ -6,15 +6,14 @@ const { sequelize } = require('./models');
 
 const {
     article,
-    account,
     topic,
     comment,
     user,
 } = require("./router");
 
 const app = express();
-const PORT = 8080;
-const SECRET = "SESAC";
+const PORT = 8081;
+const SECRET = "SESACSESACSESACSESACSESACSESACSESACSESACSESACSESACSESAC";
 
 app.use(cors());
 app.use(express.json());
@@ -36,7 +35,6 @@ sequelize.sync({force: false}).then(()=>{
 
 // API
 app.use(article);
-app.use(account);
 app.use(topic);
 app.use(comment);
 app.use(user);

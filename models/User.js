@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes){
         userid: { type: DataTypes.STRING, unique: true},
         password: { type: DataTypes.STRING, },
         nickname: { type: DataTypes.STRING, unique: true},
-        // points: { type: DataTypes.INTEGER, defaultValue: 10000},
+        role: { type: DataTypes.STRING, defaultValue: "user"},
     },{
         charset: "utf8",            // 한국어 설정
         collate: "utf8_general_ci",
@@ -17,7 +17,6 @@ module.exports = function(sequelize, DataTypes){
     User.associate = models => {
         User.hasOne(models.Comment, {foreignKey: "nickname", sourceKey: 'nickname', onDelete: "cascade",});
         User.hasOne(models.Article, {foreignKey: "nickname", sourceKey: 'nickname', onDelete: "cascade",});
-        User.hasOne(models.Account, {foreignKey: "user_id", sourceKey: 'userid', onDelete: "cascade",});
     };
 
     return User;
