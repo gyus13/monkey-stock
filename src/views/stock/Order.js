@@ -45,7 +45,7 @@ const Order = ({ isBuying, pf, orderHandler, ticker, compId, backAPI }) => {
   };
   return (
     <>
-      <Modal>
+      <Modal style={{border: `1px solid ${isBuying ? "red":"#0078ff"}`}}>
         <p>{isBuying ? "매수" : "매도"}</p>
         <p>회사명 : {targetStock.companyName}</p>
         <p>현재가 : {targetStock.currentPrice}</p>
@@ -83,6 +83,6 @@ const Modal = styled.div`
   transform: translate(-50%, -50%);
   z-index: 1000;
   border-radius: 4px;
-  border: 1px red solid;
+  padding: 1rem;
   background-color: white;
 `;
