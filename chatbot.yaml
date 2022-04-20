@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot
+  namespace: monkey-ingress-alb
+  labels:
+    service: chatbot
+    project: monkeystock
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: chatbot
+      project: monkeystock
+  template:
+    metadata:
+      labels:
+        service: chatbot
+        project: monkeystock
+    spec:
+      containers:
+      - name: chatbot
+        image: dev210/monkey-chatbot:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alb-service
+  namespace: monkey-ingress-alb
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: NodePort
+  selector:
+    service: chatbot

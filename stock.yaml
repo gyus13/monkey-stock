@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock
+  namespace: monkey-ingress-alb
+  labels:
+    service: stock
+    project: monkeystock
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: stock
+      project: monkeystock
+  template:
+    metadata:
+      labels:
+        service: stock
+        project: monkeystock
+    spec:
+      containers:
+      - name: stock
+        image: dev210/monkey-stock:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alb-service
+  namespace: monkey-ingress-alb
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: NodePort
+  selector:
+    service: stock
