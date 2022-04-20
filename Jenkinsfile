@@ -4,6 +4,7 @@ pipeline {
         DOCKERHUB_USERNAME = "gyus13"
         APP_NAME = "chatbotapp"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+        MANIFEST = "chatbot"
     }
 
     stages {
@@ -34,15 +35,16 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+                    docker.withRegistry('', 'docker-hub') {
                         docker_image.push("${env.BUILD_NUMBER}")
+                        docker_image.push("latest")
                     }
                 }
             }
         }
         stage('Update GitOps Repo') {
             steps{
-                build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+                build job: 'updateManifest', parameters: [string(name: 'DOCKERIMAGE', value: IMAGE_NAME), string(name: 'DOCKERTAG', value: env.BUILD_NUMBER), string(name: 'MANIFEST', value: MANIFEST)]
             }
         }
     }
