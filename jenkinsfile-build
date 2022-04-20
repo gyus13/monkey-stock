@@ -1,0 +1,9 @@
+ node {
+     stage('Clone repository') {
+         checkout scm
+     }
+
+     stage('Build image') {
+         app = docker.build("gyus13/chatbot-app:$BUILD_NUMBER")
+     }
+}

@@ -1,0 +1,26 @@
+node {
+     stage('Clone repository') {
+         checkout scm
+     }
+
+     stage('Build image') {
+         app = docker.build("gyus13/chatbotapp")
+     }
+
+     stage('Build Test') {
+         app.inside {
+             sh 'echo "Tests passed"'
+         }
+     }
+
+     stage('Push image') {
+         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+             app.push("${env.BUILD_NUMBER}")
+             app.push("latest")
+         }
+     }
+
+      stage('Update GitOps Repo') {
+                build job: 'updateManifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+      }
+ }
