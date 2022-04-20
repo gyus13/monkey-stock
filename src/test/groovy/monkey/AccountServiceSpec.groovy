@@ -1,4 +1,0 @@
-package monkey
-
-class AccountServiceSpec {
-}
