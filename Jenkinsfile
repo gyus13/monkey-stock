@@ -11,7 +11,7 @@ node {
                     sh "git config user.email dev_210@naver.com"
                     sh "git config user.name onzero98"
 
-                    sh "git pull"
+                    sh "git pull https://${GIT_PASSWORD}@github.com/SeSac-Cloud-Final-3/monkey-stock.git HEAD:main"
                     sh "cat ${MANIFEST}.yaml"
                     sh "sed -i 's+${DOCKERIMAGE}.*+${DOCKERIMAGE}:${DOCKERTAG}+g' ${MANIFEST}.yaml"
                     sh "cat ${MANIFEST}.yaml"
