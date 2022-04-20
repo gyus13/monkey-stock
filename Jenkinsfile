@@ -11,6 +11,7 @@ node {
                     sh "git config user.email dev_210@naver.com"
                     sh "git config user.name onzero98"
 
+                    sh "git pull"
                     sh "cat ${MANIFEST}.yaml"
                     sh "sed -i 's+${DOCKERIMAGE}.*+${DOCKERIMAGE}:${DOCKERTAG}+g' ${MANIFEST}.yaml"
                     sh "cat ${MANIFEST}.yaml"
