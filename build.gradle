@@ -51,7 +51,7 @@ jib {
         image = "openjdk:11-jdk-slim"
     }
     to {
-        image = project.findProperty("docker.image.name")
+        image = project.findProperty("docker.repository.password")
         tags = ["latest"]
         auth {
             username = project.findProperty("docker.repository.username")
