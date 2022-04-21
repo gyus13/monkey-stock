@@ -2,7 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'groovy'
+    id 'com.google.cloud.tools.jib' version '3.2.1'
 }
 
 group = 'com.example'
@@ -25,6 +25,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'io.awspring.cloud:spring-cloud-aws:2.4.0'
     implementation 'io.awspring.cloud:spring-cloud-aws-context:2.4.0'
+    implementation 'com.google.cloud.tools:jib-maven-plugin:3.2.1'
     testImplementation 'org.springframework.security:spring-security-test'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2',
@@ -35,8 +36,6 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation('org.spockframework:spock-core:2.1-groovy-3.0')
-    testImplementation('org.spockframework:spock-spring:2.1-groovy-3.0')
 }
 
 tasks.named('test') {
@@ -45,4 +44,18 @@ tasks.named('test') {
 
 jar {
     enabled(false)
+}
+
+jib {
+    from {
+        image = "openjdk:17-alpine"
+    }
+    to {
+        image = project.findProperty("docker.repository") + "/" + project.findProperty("docker.image.name")
+        tags = ["latest"]
+        auth {
+            username = project.findProperty("docker.repository.username")
+            password = project.findProperty("docker.repository.password")
+        }
+    }
 }
