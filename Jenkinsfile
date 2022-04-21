@@ -30,14 +30,18 @@ pipeline {
 
         stage('publish') {
             steps {
-                script {
-                    sh """
-                        ./gradlew jib -Pdocker.repository=${DOCKERHUB_CREDS_USR} \
-                                      -Pdocker.repository.username=${DOCKERHUB_CREDS_USR} \
-                                      -Pdocker.repository.password=${DOCKERHUB_CREDS_PSW} \
-                                      -Pdocker.image.name=${IMAGE_NAME}
-                    """
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', 
+                                 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    script {
+                        sh """
+                            ./gradlew jib -Pdocker.repository=${DOCKERHUB_CREDS_USR} \
+                                        -Pdocker.repository.username=${USERNAME} \
+                                        -Pdocker.repository.password=${PASSWORD} \
+                                        -Pdocker.image.name=${IMAGE_NAME}
+                        """
+                    }
                 }
+                
             }
         }
     }
