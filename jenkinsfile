@@ -4,6 +4,7 @@ pipeline {
         DOCKERHUB_USERNAME = "dev210"
         APP_NAME = "monkey-community"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+		MANIFEST = "community"
     }
 
     stages {
