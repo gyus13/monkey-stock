@@ -19,7 +19,7 @@ pipeline {
                 script {
                     sh """
                         chmod u+x ./gradlew
-                        .gradlew clean bootjar -Pdocker.repository=${DOCKERHUB_CREDS_USR} \
+                        ./gradlew clean bootjar -Pdocker.repository=${DOCKERHUB_CREDS_USR} \
                                                -Pdocker.repository.username=${DOCKERHUB_CREDS_USR} \
                                                -Pdocker.repository.password=${DOCKERHUB_CREDS_PSW} \
                                                -Pdocker.image.name=${IMAGE_NAME}
