@@ -39,6 +39,6 @@ app.use(topic);
 app.use(comment);
 app.use(user);
 
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`http://localhost:${PORT} 로 연결 중입니다.`);
+app.listen(PORT, () => {
+    console.log(`${PORT} 로 연결 중입니다.`);
 })

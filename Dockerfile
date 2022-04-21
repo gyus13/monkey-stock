@@ -1,8 +1,8 @@
 FROM node:16-alpine
-WORKDIR /usr/src/app
-COPY package.json .
+WORKDIR  /server
+COPY ./package.json /server/package.json
 RUN yarn install --ignore-engines
 COPY . .
 RUN npm run --script build
-EXPOSE 8080
+EXPOSE 8081
 CMD [ "npm", "start" ]
