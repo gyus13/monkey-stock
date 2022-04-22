@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_USERNAME = "dev210"
+        DOCKERHUB_CREDS = credentials('docker-hub')
         APP_NAME = "monkey-frontend"
-        IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+        IMAGE_NAME = "${DOCKERHUB_CREDS_USR}" + "/" + "${APP_NAME}"
         MANIFEST = "frontend"
     }
 
