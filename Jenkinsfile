@@ -4,6 +4,7 @@ pipeline {
         DOCKERHUB_USERNAME = "slowlight50"
         APP_NAME = "stock-crawler"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+        MANIFEST = "crawler"
     }
 
     stages {
@@ -38,6 +39,12 @@ pipeline {
                         docker_image.push("latest")
                     }
                 }
+            }
+        }
+
+        stage('Update GitOps Repo') {
+            steps {
+                build job: 'updateManifest', parameters: [string(name: 'DOCKERIMAGE', value: IMAGE_NAME), string(name: 'DOCKERTAG', value: env.BUILD_NUMBER), string(name: 'MANIFEST', value: MANIFEST)]
             }
         }
     }
