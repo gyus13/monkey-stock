@@ -4,6 +4,7 @@ pipeline {
         DOCKERHUB_CREDS = credentials('docker-hub')
         APP_NAME = "backend-stock"
         IMAGE_NAME = "${DOCKERHUB_CREDS_USR}" + "/" + "${APP_NAME}"
+        MANIFEST = "stock"
     }
 
     stages {
@@ -42,6 +43,12 @@ pipeline {
                     }
                 }
                 
+            }
+        }
+
+        stage('Update GitOps Repo') {
+            steps {
+                build job: 'updateManifest', parameters: [string(name: 'DOCKERIMAGE', value: IMAGE_NAME), string(name: 'DOCKERTAG', value: env.BUILD_NUMBER), string(name: 'MANIFEST', value: MANIFEST)]
             }
         }
     }
