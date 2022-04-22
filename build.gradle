@@ -52,7 +52,7 @@ jib {
     }
     to {
         image = project.findProperty("docker.image.name")
-        tags = ["docker.image.tag"]
+        tags = [project.findProperty("docker.image.tag")]
         auth {
             username = project.findProperty("docker.repository.username")
             password = project.findProperty("docker.repository.password")

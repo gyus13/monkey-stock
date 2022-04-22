@@ -23,7 +23,7 @@ pipeline {
                         ./gradlew clean bootjar -Pdocker.repository=${DOCKERHUB_CREDS_USR} \
                                                -Pdocker.repository.username=${DOCKERHUB_CREDS_USR} \
                                                -Pdocker.repository.password=${DOCKERHUB_CREDS_PSW} \
-                                               -Pdocker.image.name=${IMAGE_NAME}
+                                               -Pdocker.image.name=${IMAGE_NAME} \
                                                -Pdocker.image.tag=${env.BUILD_NUMBER}
                     """
                 }
@@ -39,7 +39,7 @@ pipeline {
                             ./gradlew jib -Pdocker.repository=${DOCKERHUB_CREDS_USR} \
                                         -Pdocker.repository.username=${USERNAME} \
                                         -Pdocker.repository.password=${PASSWORD} \
-                                        -Pdocker.image.name=${IMAGE_NAME}
+                                        -Pdocker.image.name=${IMAGE_NAME} \
                                         -Pdocker.image.tag=${env.BUILD_NUMBER}
                         """
                     }
