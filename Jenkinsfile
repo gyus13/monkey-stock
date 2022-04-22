@@ -1,14 +1,13 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_USERNAME = "gyus13"
+        DOCKERHUB_CREDS = credentials('docker-hub')
         APP_NAME = "chatbotapp"
-        IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
-        MANIFEST = "chatbot"
+        IMAGE_NAME = "${DOCKERHUB_CREDS_USR}" + "/" + "${APP_NAME}"
+		MANIFEST = "chatbot"
     }
 
     stages {
-
         stage('Clean Workspace'){
             steps {
                 script {
@@ -22,7 +21,6 @@ pipeline {
                 checkout scm
             }
         }
-
 
         stage('Build Docker Image') {
             steps {
@@ -42,8 +40,9 @@ pipeline {
                 }
             }
         }
+
         stage('Update GitOps Repo') {
-            steps{
+            steps {
                 build job: 'updateManifest', parameters: [string(name: 'DOCKERIMAGE', value: IMAGE_NAME), string(name: 'DOCKERTAG', value: env.BUILD_NUMBER), string(name: 'MANIFEST', value: MANIFEST)]
             }
         }
