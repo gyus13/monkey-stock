@@ -12,7 +12,7 @@ const {
 } = require("./router");
 
 const app = express();
-const PORT = 8081;
+const PORT = 80;
 const SECRET = "SESACSESACSESACSESACSESACSESACSESACSESACSESACSESACSESAC";
 
 app.use(cors());

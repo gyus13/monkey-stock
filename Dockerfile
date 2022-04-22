@@ -4,5 +4,5 @@ COPY ./package.json /server/package.json
 RUN yarn install --ignore-engines
 COPY . .
 RUN npm run --script build
-EXPOSE 8081
+EXPOSE 80
 CMD [ "npm", "start" ]
