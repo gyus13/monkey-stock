@@ -17,13 +17,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
                 .csrf()
                 .disable()
                 .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)//인증 실패 진입점
-                .accessDeniedHandler(jwtAccessDeniedHandler)//인가 실패 진입점
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)// 인증 실패 진입점
+                .accessDeniedHandler(jwtAccessDeniedHandler)// 인가 실패 진입점
 
                 .and()
                 .sessionManagement()
@@ -32,7 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()
-                // TODO user/admin role 구현 시 접근 제한 수정
 
                 .and()
                 .httpBasic();
