@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const dialogflow = require('dialogflow');
 const app = express();
-const cors = require('cors');
+const cors = require("cors");
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
 const config = require('../config/keys');
 
