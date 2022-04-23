@@ -12,7 +12,7 @@ function Post() {
     let navigate = useNavigate();
     const [post, setPost] = useState({ title: "", content: "", tags: "" });
     const [topics, setTopics] = useState([]);
-    const BACK_URL = `http://${window.location.hostname}:8081`
+    const BACK_URL = `${window.location.hostname}:8081`
 
     useEffect(() => {
         async function refresh() {

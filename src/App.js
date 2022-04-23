@@ -27,7 +27,7 @@ function App() {
   const [domain, setDomain] = useState(window.location.pathname.substring(1, 10));
   const [update, setUpdate] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const backAPI = `${window.location.host}:8080/api/v1`;
+  const backAPI = `http://${window.location.hostname}:8080/api/v1`;
 
   const handleModal = () => {
     setIsOpen(!isOpen)
