@@ -5,7 +5,7 @@ import loginCheck from "../../utils/loginCheck";
 import Account from "./Account";
 import axios from "axios";
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 function Stock({ backAPI }) {
 

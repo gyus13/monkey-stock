@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components/macro";
 import axios from "axios";
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 const TradeLogs = ({ backAPI }) => {
   const logsAPI = backAPI + "/logs";

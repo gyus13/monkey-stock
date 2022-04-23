@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 import useStock from "../../utils/useStock";
 import axios from "axios";
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 const Order = ({ isBuying, pf, orderHandler, ticker, compId, backAPI }) => {
   const tradeAPI = backAPI + "/trade";

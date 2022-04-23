@@ -5,7 +5,7 @@ import Ranking from "./Ranking";
 import NewCompetition from "./NewCompetition";
 import axios from "axios";
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 const Competition = ({ backAPI }) => {
   const compAPI = backAPI + "/competition";

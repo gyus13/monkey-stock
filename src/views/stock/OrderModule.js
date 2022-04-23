@@ -5,7 +5,7 @@ import OrderButton from "./OrderButton";
 import useStock from "../../utils/useStock";
 import axios from "axios";
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 const OrderModule = ({ backAPI , company, compId, orderOpened, setOrderOpened}) => {
 
