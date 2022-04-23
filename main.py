@@ -27,7 +27,7 @@ def get_page(pageNumber, sise):
         sise.append([ele for ele in cols if ele])
 
 def crawl():
-    print("crawling start at: " + time.localtime())
+    print("crawling start at: " + time.localtime().strftime())
     start = time.time()
     df = []
     sise = []
