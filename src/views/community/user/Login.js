@@ -7,7 +7,7 @@ export const Login = ({ showLogin, setShowLogin }) => {
     
     let navigate = useNavigate();
     const [login, setLogin] = useState({ userid: "", password: "", });
-    const BACK_URL = `${window.location.hostname}:8081`
+    const BACK_URL = `http://${window.location.hostname}:8081`
 
     const getLogin = () => {
         axios.post(BACK_URL + '/api/v1/user/login', {
