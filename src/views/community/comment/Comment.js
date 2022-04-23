@@ -12,7 +12,7 @@ function Comment() {
 
     const [comments, setComments] = useState([]);
     const [post, setPost] = useState({content:"",});
-    const BACK_URL = "http://localhost:8081"
+    const BACK_URL = `${window.location.host}:8081`
 
     useEffect(() => {
         async function refresh() {

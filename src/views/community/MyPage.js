@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function MyPage() {
 
     const [userProfile, setUserProfile] = useState([]);
-    const BACK_URL = "http://localhost:8081"
+    const BACK_URL = `${window.location.host}:8081`
 
     useLayoutEffect(() => {
         async function refresh() {

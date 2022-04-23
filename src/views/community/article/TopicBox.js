@@ -7,7 +7,7 @@ const TopicBox = () => {
 
     const [totals, setTotals] = useState([]);
     const [setTagsTitle, SetTagsTitle] = useState([]);
-    const BACK_URL = "http://localhost:8081"
+    const BACK_URL = `${window.location.host}:8081`
 
     // 전체 게시글 불러오기
     useLayoutEffect(() => {

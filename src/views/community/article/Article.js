@@ -14,7 +14,7 @@ function Article() {
     const id = window.location.pathname.substring(19);
     const [userProfile, setUserProfile] = useState([]);
     const [contents, setContents] = useState([]);
-    const BACK_URL = "http://localhost:8081"
+    const BACK_URL = `${window.location.host}:8081`
 
     useLayoutEffect(() => {
         async function refresh() {

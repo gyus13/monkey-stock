@@ -13,7 +13,7 @@ const Search = () => {
     let [pageNum, setPageNum] = useState(0);
     const [max, setMax] = useState(0);
     let [totals, setTotals] = useState([]);
-    const BACK_URL = "http://localhost:8081"
+    const BACK_URL = `${window.location.host}:8081`
 
     // 최초 게시글 불러오기
     useLayoutEffect(() => {
