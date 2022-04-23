@@ -8,6 +8,7 @@ import loginCheck from "../../utils/loginCheck";
 
 const LeftSideBar = ({update, setUpdate}) => {
 
+    const id = window.location.host;
     const [showRegister, setShowRegister] = useState(false);
     const [isLoggedin, setIsLoggedin] = useState(false);
 
@@ -27,6 +28,7 @@ const LeftSideBar = ({update, setUpdate}) => {
 
     return (
         <>
+        {console.log(id)}
         <LeftSide>
             {
                 isLoggedin ?

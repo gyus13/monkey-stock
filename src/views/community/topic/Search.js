@@ -7,6 +7,7 @@ import 'moment/locale/ko'
 
 const Search = () => {
 
+    const id = window.location.host;
     const [searchParams] = useSearchParams();
     const keyword = searchParams.get("search");
     let [pageNum, setPageNum] = useState(0);
@@ -58,6 +59,7 @@ const Search = () => {
 
     return (
         <SiteView>
+            {console.log(id)}
             <Box>
                 <h1>{keyword === "all" ? "전체" : keyword} 게시판</h1>
                 <TableSize>
