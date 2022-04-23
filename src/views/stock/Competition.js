@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 import Ranking from "./Ranking";
 import NewCompetition from "./NewCompetition";
 import axios from "axios";
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 const Competition = ({ backAPI }) => {
   const compAPI = backAPI + "/competition";

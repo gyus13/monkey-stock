@@ -4,7 +4,7 @@ import styled, { css } from "styled-components/macro";
 import loginCheck from "../../utils/loginCheck";
 import Account from "./Account";
 import axios from "axios";
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 function Stock({ backAPI }) {
 

@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 import OrderButton from "./OrderButton";
 import useStock from "../../utils/useStock";
 import axios from "axios";
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 const Trade = ({ backAPI, num, setCompany }) => {
     const compId = num;

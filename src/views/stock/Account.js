@@ -7,7 +7,7 @@ import Portfolio from "./Portfolio";
 import Trade from "./Trade";
 import OrderModule from "./OrderModule";
 import axios from "axios";
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 const Account = ({ backAPI }) => {
 
