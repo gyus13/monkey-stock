@@ -20,7 +20,8 @@ public class UpdateStockScheduler {
 
     @Schedules({
             @Scheduled(cron = "5/10 0/2 9-14 ? * 1-5"),
-            @Scheduled(cron = "5/10 0-30/2 15 ? * 1-5")
+            @Scheduled(cron = "5/10 0-30/2 15 ? * 1-5"),
+            @Scheduled(cron = "5/10 * * ? * *")
     })
     public void updateStock() throws IOException, Exception {
         stockUpdateService.updateStocks(false);
