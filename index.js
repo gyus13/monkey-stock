@@ -15,7 +15,7 @@ const app = express();
 const PORT = 80;
 const SECRET = "SESACSESACSESACSESACSESACSESACSESACSESACSESACSESACSESAC";
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: [`${window.location.host}`], credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
