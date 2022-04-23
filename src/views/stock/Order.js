@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components/macro";
 import useStock from "../../utils/useStock";
 import axios from "axios";
-axios.defaults.withCredentials = false;
+axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+axios.defaults.withCredentials = true;
 
 const Order = ({ isBuying, pf, orderHandler, ticker, compId, backAPI }) => {
   const tradeAPI = backAPI + "/trade";

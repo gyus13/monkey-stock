@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components/macro";
 import axios from "axios";
-axios.defaults.withCredentials = false;
+axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+axios.defaults.withCredentials = true;
 
 const Ranking = ({ backAPI, competition }) => {
   const [ranking, setRanking] = useState([]);

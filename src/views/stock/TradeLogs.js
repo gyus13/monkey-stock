@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components/macro";
 import axios from "axios";
-axios.defaults.withCredentials = false;
+axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+axios.defaults.withCredentials = true;
 
 const TradeLogs = ({ backAPI }) => {
   const logsAPI = backAPI + "/logs";
