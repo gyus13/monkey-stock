@@ -6,7 +6,7 @@ import styled, { css } from "styled-components/macro";
 export const Register = ({ showRegister, setShowRegister }) => {
 
     const [register, setRegister] = useState({ userid: "", password: "", nickname: "" });
-    const BACK_URL = `${window.location.hostname}:8081`
+    const BACK_URL = `http://${window.location.hostname}:8081`
 
     const getRegister = () => {
         // console.log(register);
