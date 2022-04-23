@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true;
 function MyPage() {
 
     const [userProfile, setUserProfile] = useState([]);
-    const BACK_URL = `${window.location.host}`
+    const BACK_URL = `${window.location.host}:8081`
 
     useLayoutEffect(() => {
         async function refresh() {
