@@ -3,7 +3,7 @@ import { Routes, Route, Link, Outlet } from "react-router-dom";
 import styled from "styled-components/macro";
 import Ranking from "./Ranking";
 import NewCompetition from "./NewCompetition";
-import Axios from "axios";
+import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const Competition = ({ backAPI }) => {

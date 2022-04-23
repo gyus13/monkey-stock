@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components/macro";
-import Axios from "axios";
+import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const Portfolio = ({ backAPI }) => {

@@ -3,7 +3,7 @@ import { Outlet, useParams } from "react-router-dom";
 import styled from "styled-components/macro";
 import OrderButton from "./OrderButton";
 import useStock from "../../utils/useStock";
-import Axios from "axios";
+import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const OrderModule = ({ backAPI , company, compId, orderOpened, setOrderOpened}) => {

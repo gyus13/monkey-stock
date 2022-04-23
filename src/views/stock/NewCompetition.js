@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import Axios from "axios";
+import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const NewCompetition = ({ backAPI }) => {

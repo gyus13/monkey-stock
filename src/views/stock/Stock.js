@@ -3,7 +3,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components/macro";
 import loginCheck from "../../utils/loginCheck";
 import Account from "./Account";
-import Axios from "axios";
+import axios from "axios";
 axios.defaults.withCredentials = true;
 
 function Stock({ backAPI }) {

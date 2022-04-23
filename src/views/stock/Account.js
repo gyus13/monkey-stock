@@ -6,7 +6,7 @@ import TradeLogs from "./TradeLogs";
 import Portfolio from "./Portfolio";
 import Trade from "./Trade";
 import OrderModule from "./OrderModule";
-import Axios from "axios";
+import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const Account = ({ backAPI }) => {
