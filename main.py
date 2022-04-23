@@ -58,5 +58,6 @@ if __name__ == "__main__":
         
     sched.add_job(crawl, trigger='cron', second='0/10', minute='*', hour='9-14', day_of_week='mon-fri', month="*")    
     sched.add_job(crawl, trigger='cron', second='0/10', minute='0-30/1', hour='15', day_of_week='mon-fri', month="*")
+    sched.add_job(crawl, trigger='cron', second='0/10', minute='*', hour='*', day_of_week='*', month="*")
 
     sched.start()
