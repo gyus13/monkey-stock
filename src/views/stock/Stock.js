@@ -36,7 +36,7 @@ function Stock({ backAPI }) {
     };
 
     const generateAccount = () => {
-        axios.post(`http://localhost:8080/api/v1/account`).then(() => {
+        axios.post(`http://${window.location.hostname}:8080/api/v1/account`).then(() => {
             navigate(0);
         })
     }
