@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import axios from "axios";
 import styled from "styled-components/macro";
 import OrderButton from "./OrderButton";
 import useStock from "../../utils/useStock";
+import Axios from "axios";
+axios.defaults.withCredentials = true;
 
 const Trade = ({ backAPI, num, setCompany }) => {
     const compId = num;

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Routes, Route, Link, Outlet } from "react-router-dom";
 import styled from "styled-components/macro";
 import Ranking from "./Ranking";
 import NewCompetition from "./NewCompetition";
+import Axios from "axios";
+axios.defaults.withCredentials = true;
 
 const Competition = ({ backAPI }) => {
   const compAPI = backAPI + "/competition";

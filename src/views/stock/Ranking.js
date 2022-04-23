@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import styled from "styled-components/macro";
+import Axios from "axios";
+axios.defaults.withCredentials = true;
 
 const Ranking = ({ backAPI, competition }) => {
   const [ranking, setRanking] = useState([]);

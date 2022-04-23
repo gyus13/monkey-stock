@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import axios from "axios";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-
 import styled, { css } from "styled-components/macro";
 import loginCheck from "../../utils/loginCheck";
 import Account from "./Account";
+import Axios from "axios";
+axios.defaults.withCredentials = true;
 
 function Stock({ backAPI }) {
 

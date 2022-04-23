@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Axios from "axios";
 import { useEffect } from "react";
 import styled from "styled-components";
+import Axios from "axios";
+axios.defaults.withCredentials = true;
 
 function Chatbot() {
     const [dialogs, setDialogs] = useState([

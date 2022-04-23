@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components/macro";
 import useStock from "../../utils/useStock";
+import Axios from "axios";
+axios.defaults.withCredentials = true;
 
 const Order = ({ isBuying, pf, orderHandler, ticker, compId, backAPI }) => {
   const tradeAPI = backAPI + "/trade";

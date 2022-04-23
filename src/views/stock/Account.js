@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import axios from "axios";
 import { Routes, Route, Link, Outlet, NavLink } from "react-router-dom";
 import styled from "styled-components/macro";
 import AccountInfo from "./AccountInfo";
@@ -7,6 +6,8 @@ import TradeLogs from "./TradeLogs";
 import Portfolio from "./Portfolio";
 import Trade from "./Trade";
 import OrderModule from "./OrderModule";
+import Axios from "axios";
+axios.defaults.withCredentials = true;
 
 const Account = ({ backAPI }) => {
 
