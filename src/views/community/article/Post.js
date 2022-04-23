@@ -1,11 +1,12 @@
 import React, { useState, useEffect, } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/ko.js';
 import styled from "styled-components/macro";
 import './CKEdit.css';
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function Post() {
     let navigate = useNavigate();

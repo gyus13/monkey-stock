@@ -1,7 +1,8 @@
 import React, { useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components/macro";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const TopicBox = () => {
 

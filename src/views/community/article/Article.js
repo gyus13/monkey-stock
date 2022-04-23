@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components/macro";
 import parse from 'html-react-parser';
 import Comment from "../comment/Comment";
 import moment from "moment";
 import 'moment/locale/ko'
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function Article() {
 

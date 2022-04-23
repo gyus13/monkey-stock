@@ -1,9 +1,10 @@
 import React, { useState, useEffect,useLayoutEffect } from "react";
-import axios from "axios";
 import styled, { css } from "styled-components/macro";
 import loginCheck from "../../../utils/loginCheck";
 import moment from "moment";
 import 'moment/locale/ko'
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function Comment() {
 

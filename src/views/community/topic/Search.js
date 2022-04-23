@@ -1,9 +1,10 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import axios from "axios";
 import styled, {css} from "styled-components/macro";
 import moment from "moment";
 import 'moment/locale/ko'
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const Search = () => {
 

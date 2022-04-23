@@ -1,7 +1,8 @@
 import React, { useState, useEffect,useLayoutEffect } from "react";
-import axios from "axios";
 import styled, {css} from "styled-components/macro";
 import { Link } from "react-router-dom";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function MyPage() {
 
